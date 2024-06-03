@@ -1,20 +1,18 @@
 import argparse
 import requests
 import os
+from bs4 import BeautifulSoup
 
-def getPage(url: str):
-    if type(url) != str: 
-        return "not a url"
-    if "web.txt" in os.listdir(): 
-        os.remove("web.txt")
-    target, web = requests.get(url), open("web.txt", "w")
-    web.write(str(target.text))
-    web.close()
-    return [target.status_code, target.encoding, target.headers["content-type"]]
+def getPage(url: str, selectorname: str, className: str): 
+    pages = requests.get(url)
+    soup = BeautifulSoup(pages.text, 'html.parser')
+    return soup.findAll("p", {selectorname: className})
 args = argparse.ArgumentParser(
-    prog="pyscraper", 
-    description="a python web scraper ", 
-)
+    prog="pyscrape", 
+    description="pyscrape is a cli web scraper", 
+) 
 args.add_argument("-u", "--url")
-parser = args.parse_args()
-print(getPage(parser.url))
+args.add_argument("-s", "--selectorname")
+args.add_argument("-n", "--name")
+parse = args.parse_args()
+print(getPage(parse.url, parse.selectorname, parse.name))

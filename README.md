@@ -1,9 +1,11 @@
 # pyscrape
-a web scraper written in python
+a web scraper for the cli written in python uses beautiful soup to get html text 
 
-How to use: 
-    first, run ``` git clone https://github.com/Jamcha123/pyscrape ```
+How to use:
 
-    then, run ``` python3 index.py --url website of your choice ```
+    First, you use git clone <repo-url> to clone it. 
 
-You get the status code, encoding and content-type and a text file with the html in text format call web.txt.
+    Then, you run: 
+        ``` python3 index.py --url --selectorname (the name not the selector so class instead of . or id instead of #), --name (class or id name) ```
+    
+    Finally, get the html text 
